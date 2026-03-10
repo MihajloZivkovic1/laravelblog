@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -44,5 +45,47 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
+
+    public function isAdmin(){
+        return $this->role() === 'admin';
+    }
+
+
+    public function isUser(){
+        return $this->role() === 'user';
+    }
+
+
+    public function getAllUsersPaginated($perPage=20){
+        return User::orderBy('created_at','desc')
+            ->paginate($perPage);
+    }
+
+
+    public function updateRole($id,$role){
+        $user = User::findOrFail($id);
+        $user->update(['role'=>$role]);
+
+
+        return $user;
+    }
+
+    public function deleteUser($id){
+        return User::findOrFail($id)->delete();
     }
 }
