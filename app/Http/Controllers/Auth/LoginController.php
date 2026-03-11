@@ -30,7 +30,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard');
             }
 
-            return redirect()->route('/');
+            return redirect()->route('home');
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

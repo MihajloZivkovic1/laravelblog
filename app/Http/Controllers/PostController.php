@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -40,7 +41,7 @@ class PostController extends Controller
         $tags = $this->tag->getAllOrdered();
 
 
-        ActivityLog::log('post.view', auth()->check() ? auth()->user()->name . ' viewed post: ' . $post->title : 'Guest viewed post: ' . $post->title);
+        ActivityLog::storeLog('post.view', auth()->check() ? auth()->user()->name . ' viewed post: ' . $post->title : 'Guest viewed post: ' . $post->title);
 
 
         return view('posts.show', compact('post', 'categories', 'tags'));

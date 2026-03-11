@@ -35,7 +35,7 @@ class AdminCategoryController extends Controller
 
         ActivityLog::storeLog('category.created', auth()->user()->name . ' created category: ' . $category->name);
 
-        return redirect()->route('admin.category.index')->with('success', 'Category created!');
+        return redirect()->route('admin.categories.index')->with('success', 'Category created!');
 
     }
 
