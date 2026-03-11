@@ -22,36 +22,51 @@ class ContactController extends Controller
     }
 
 
-    public function store(Request $request){
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'required',
-            'message' => 'required'
-        ]);
+    public function store(Request $request)
+    {
 
-        $this->contactMessage->store($data);
-
-
-        Mail::send('emails.contact', ['data' => $data], function ($m) use ($data) {
-            $m->to(config('mail.admin_email', 'admin@blog.com'))
-                ->subject('New Contact Message: ' . $data['subject'])
-                ->replyTo($data['email'], $data['name']);
-        });
-
-
-        ActivityLog::storeLog('contact.sent', $data['name'] . ' sent a contact message: ' . $data['subject']);
-
-
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Your message has been sent successfully!'
+        try {
+            $data = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required'
             ]);
+
+            $this->contactMessage->store($data);
+
+
+            Mail::send('emails.contact', ['data' => $data], function ($m) use ($data) {
+                $m->to(config('mail.admin_email', 'admin@blog.com'))
+                    ->subject('New Contact Message: ' . $data['subject'])
+                    ->replyTo($data['email'], $data['name']);
+            });
+
+
+            ActivityLog::storeLog('contact.sent', $data['name'] . ' sent a contact message: ' . $data['subject']);
+
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Your message has been sent successfully!'
+                ]);
+            }
+
+            return back()->with('success', 'Your message has been sent successfully!');
+
+
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => ['message' => [$e->getMessage()]]
+                ], 500);
+            }
+
+
         }
 
-        return back()->with('success', 'Your message has been sent successfully!');
+        return back()->with('error', 'Something went wrong!');
     }
-
-
 }
