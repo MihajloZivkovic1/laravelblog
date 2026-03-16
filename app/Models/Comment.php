@@ -30,7 +30,7 @@ class Comment extends Model
     public function store(){
         return Comment::create([
             'post_id' => request('post_id'),
-            'user_id' => request('user_id'),
+            'user_id' => auth()->id(), // or keep it passed from controller
             'body' => request('body'),
         ]);
     }

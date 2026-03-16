@@ -22,6 +22,8 @@ class CommentController extends Controller
             'body' => ['required','min:3','max:1000'],
         ]);
 
+        $data['user_id'] = auth()->id(); // add this
+
         $comment = $this->comment->store($data);
         $comment->load('user');
 

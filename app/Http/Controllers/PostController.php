@@ -58,6 +58,15 @@ class PostController extends Controller
         return view('posts.index', compact('posts', 'categories', 'tags'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword    = $request->input('q');
+        $posts      = $this->post->searchPaginated($keyword, 10);
+        $categories = $this->category->getAllOrdered();
+        $tags       = $this->tag->getAllOrdered();
+
+        return view('posts.index', compact('posts', 'categories', 'tags', 'keyword'));
+    }
 
     public function byTag($slug)
     {

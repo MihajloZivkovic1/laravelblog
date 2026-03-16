@@ -121,23 +121,22 @@
                     </div>
                 </div>
 
-                {{-- Featured Image --}}
                 <div class="card mb-4">
-                    <div class="card-header">Featured Image</div>
+                    <div class="card-header">Image</div>
                     <div class="card-body">
 
                         {{-- Current Image --}}
-                        @if($post->featured_image)
+                        @if($post->image)
                             <div class="mb-3">
-                                <small class="text-muted d-block mb-2">Current image:</small>
-                                <img src="{{ asset('storage/' . $post->featured_image) }}"
+                                <small class="text-muted d-block mb-2">Image:</small>
+                                <img src="{{ asset('storage/' . $post->image) }}"
                                      class="img-fluid rounded"
                                      alt="Current image">
                             </div>
                         @endif
 
                         <label class="form-label fw-semibold">
-                            {{ $post->featured_image ? 'Replace Image' : 'Upload Image' }}
+                            {{ $post->image ? 'Replace Image' : 'Upload Image' }}
                         </label>
                         <input
                             type="file"

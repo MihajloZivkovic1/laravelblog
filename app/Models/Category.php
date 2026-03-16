@@ -32,7 +32,7 @@ class Category extends Model
     public function store($data){
        return Category::create([
            'name' => $data['name'],
-           'slug' => $data['slug']
+           'slug' => $data['name']
        ]);
     }
 

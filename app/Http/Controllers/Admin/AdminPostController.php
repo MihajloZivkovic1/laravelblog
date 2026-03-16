@@ -64,7 +64,15 @@ class AdminPostController extends Controller
 
     }
 
-    public function edit(Request $request,$id){
+    public function edit($id)
+    {
+        $post       = Post::findOrFail($id);
+        $categories = $this->category->getAllOrdered();
+        $tags       = $this->tag->getAllOrdered();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
+    }
+
+    public function update(Request $request,$id){
         $data = $request->validate([
             'title'       => 'required|string|max:255',
             'body'        => 'required',
@@ -85,7 +93,7 @@ class AdminPostController extends Controller
             $imagePath = $request->file('image')->store('images','public');
         }
 
-        $post = $this->post->updatePost($data,$imagePath);
+        $post = $this->post->updatePost($id,$data,$imagePath);
 
 
         $this->post->syncTags($post, $data['tags'] ?? []);

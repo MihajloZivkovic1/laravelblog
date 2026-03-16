@@ -16,13 +16,13 @@ class AdminCategoryController extends Controller
     }
 
     public function index(){
-        $categories = $this->category->getWithPostCount();
-        return view('admin.posts.index',compact('categories'));
+        $categories = $this->category->getAllOrdered();
+        return view('admin.categories.index',compact('categories'));
     }
 
 
     public function create(){
-        return view('admin.posts.create');
+        return view('admin.categories.create');
     }
 
     public function store(Request $request){

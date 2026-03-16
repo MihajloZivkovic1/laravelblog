@@ -16,7 +16,7 @@ class ActivityLog extends Model
 
     public static function storeLog($action, $description){
         return self::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->check() ? auth()->user()->id : null,
             'action' => $action,
             'description' => $description,
             'ip_address' => request()->ip()

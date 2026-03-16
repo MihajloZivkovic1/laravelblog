@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-   protected $fillable = ['user_id', 'category_id', 'title', 'slug', 'body', 'featured_image', 'status'];
+   protected $fillable = ['user_id', 'category_id', 'title', 'slug', 'body', 'image', 'status'];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -93,7 +93,7 @@ class Post extends Model
             'title'          => $data['title'],
             'slug'           => \Str::slug($data['title']),
             'body'           => $data['body'],
-            'featured_image' => $imagePath,
+            'image' => $imagePath,
             'status'         => $data['status'] ?? 'draft',
         ]);
     }
@@ -107,7 +107,7 @@ class Post extends Model
             'title'          => $data['title'],
             'slug'           => \Str::slug($data['title']),
             'body'           => $data['body'],
-            'featured_image' => $imagePath ?? $post->featured_image,
+            'image' => $imagePath ?? $post->image,
             'status'         => $data['status'],
         ]);
         return $post;
