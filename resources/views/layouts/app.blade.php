@@ -150,6 +150,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://docs.google.com/document/d/1h5ON_R7uMNjFuDfZQV1tJ9eooxluC-uMH2y5EWyhjhc/edit" target="_blank">
+                        <i class="bi bi-file-earmark-text"></i> DOKUMENTACIJA
+                    </a>
+                </li>
 
                 @auth
                     @if(auth()->user()->isAdmin())
