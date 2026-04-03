@@ -17,7 +17,6 @@
 
         <div class="row">
 
-            {{-- Main Content --}}
             <div class="col-lg-8">
                 <div class="card mb-4">
                     <div class="card-header">Post Content</div>
@@ -54,10 +53,9 @@
                 </div>
             </div>
 
-            {{-- Sidebar Options --}}
+
             <div class="col-lg-4">
 
-                {{-- Publish --}}
                 <div class="card mb-4">
                     <div class="card-header">Publish</div>
                     <div class="card-body">
@@ -78,7 +76,6 @@
                     </div>
                 </div>
 
-                {{-- Category --}}
                 <div class="card mb-4">
                     <div class="card-header">Category</div>
                     <div class="card-body">
@@ -99,7 +96,7 @@
                     </div>
                 </div>
 
-                {{-- Tags --}}
+
                 <div class="card mb-4">
                     <div class="card-header">Tags</div>
                     <div class="card-body">
@@ -125,7 +122,7 @@
                     <div class="card-header">Image</div>
                     <div class="card-body">
 
-                        {{-- Current Image --}}
+
                         @if($post->image)
                             <div class="mb-3">
                                 <small class="text-muted d-block mb-2">Image:</small>
@@ -164,7 +161,7 @@
 
 @push('scripts')
     <script>
-        // Image preview before upload
+
         document.getElementById('imageInput').addEventListener('change', function() {
             const file = this.files[0];
             if (file) {

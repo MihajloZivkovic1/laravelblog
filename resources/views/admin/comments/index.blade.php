@@ -61,10 +61,39 @@
         </div>
     </div>
 
-    {{-- Pagination --}}
     @if($comments->hasPages())
-        <div class="d-flex justify-content-center mt-4">
-            {{ $comments->links() }}
+        <div class="d-flex justify-content-center align-items-center gap-1 mt-4">
+            @if($comments->onFirstPage())
+                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                <i class="bi bi-chevron-left"></i>
+            </span>
+            @else
+                <a href="{{ $comments->previousPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            @endif
+
+            @foreach($comments->getUrlRange(1, $comments->lastPage()) as $page => $url)
+                @if($page == $comments->currentPage())
+                    <span class="btn btn-sm rounded-pill px-3" style="background: var(--accent); color: black;">
+                    {{ $page }}
+                    </span>
+                @else
+                    <a href="{{ $url }}" class="btn btn-sm btn-light rounded-pill px-3">
+                        {{ $page }}
+                    </a>
+                @endif
+            @endforeach
+
+            @if($comments->hasMorePages())
+                <a href="{{ $comments->nextPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            @else
+                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                <i class="bi bi-chevron-right"></i>
+            </span>
+            @endif
         </div>
     @endif
 

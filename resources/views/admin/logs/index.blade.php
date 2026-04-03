@@ -94,10 +94,39 @@
         </div>
     </div>
 
-    {{-- Pagination --}}
     @if($logs->hasPages())
-        <div class="d-flex justify-content-center mt-4">
-            {{ $logs->appends(request()->query())->links() }}
+        <div class="d-flex justify-content-center align-items-center gap-1 mt-4">
+            @if($logs->onFirstPage())
+                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                <i class="bi bi-chevron-left"></i>
+            </span>
+            @else
+                <a href="{{ $logs->previousPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            @endif
+
+            @foreach($logs->getUrlRange(1, $logs->lastPage()) as $page => $url)
+                @if($page == $logs->currentPage())
+                    <span class="btn btn-sm rounded-pill px-3" style="background: var(--accent); color: black;">
+                    {{ $page }}
+                    </span>
+                @else
+                    <a href="{{ $url }}" class="btn btn-sm btn-light rounded-pill px-3">
+                        {{ $page }}
+                    </a>
+                @endif
+            @endforeach
+
+            @if($logs->hasMorePages())
+                <a href="{{ $logs->nextPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            @else
+                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                <i class="bi bi-chevron-right"></i>
+            </span>
+            @endif
         </div>
     @endif
 

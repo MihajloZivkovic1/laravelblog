@@ -12,7 +12,6 @@
                     <h2 class="mb-1">Contact Us</h2>
                     <p class="text-muted mb-4">Have a question or feedback? We'd love to hear from you.</p>
 
-                    {{-- Success Message --}}
                     <div id="successAlert" class="alert alert-success d-none">
                         <i class="bi bi-check-circle"></i> Your message has been sent successfully!
                     </div>
@@ -89,7 +88,6 @@
 
         </div>
 
-        {{-- Contact Info Sidebar --}}
         <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="sidebar-widget">
                 <h5><i class="bi bi-info-circle"></i> Get In Touch</h5>
@@ -126,7 +124,6 @@
             btn.disabled = true;
             btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
 
-            // Clear previous errors
             document.querySelectorAll('[class^="error-"]').forEach(el => el.textContent = '');
 
             const formData = {
@@ -151,7 +148,6 @@
                         document.getElementById('successAlert').classList.remove('d-none');
                         document.getElementById('contactForm').reset();
                     } else if (data.errors) {
-                        // Show validation errors per field
                         Object.keys(data.errors).forEach(field => {
                             const el = document.querySelector(`.error-${field}`);
                             if (el) el.textContent = data.errors[field][0];

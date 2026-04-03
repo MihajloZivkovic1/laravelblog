@@ -5,10 +5,8 @@
 @section('content')
     <div class="row">
 
-        {{-- Main Content --}}
         <div class="col-lg-8">
 
-            {{-- Search Results Header --}}
             @if(isset($keyword))
                 <div class="mb-4">
                     <h4>Search results for: <span class="text-accent">"{{ $keyword }}"</span></h4>
@@ -28,12 +26,11 @@
                 <h4 class="mb-4">Latest Posts</h4>
             @endif
 
-            {{-- Posts Grid --}}
             @forelse($posts as $post)
                 <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden">
+
                     <div class="row g-0">
 
-                        {{-- Featured Image --}}
                         @if($post->featured_image)
                             <div class="col-md-4">
                                 <img
@@ -97,6 +94,7 @@
                                         </div>
                                     </div>
                             </div>
+
                     </div>
                     @empty
                         <div class="text-center py-5">
@@ -108,19 +106,49 @@
                         </div>
                     @endforelse
 
-                    {{-- Pagination --}}
+
                     @if($posts->hasPages())
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $posts->appends(request()->query())->links() }}
+                        <div class="d-flex justify-content-center align-items-center gap-1 mt-4">
+
+                            @if($posts->onFirstPage())
+                                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                                <i class="bi bi-chevron-left"></i>
+                                </span>
+                            @else
+                                <a href="{{ $posts->previousPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            @endif
+
+                            @foreach($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                                @if($page == $posts->currentPage())
+                                    <span class="btn btn-sm rounded-pill px-3" style="background: var(--accent); color: #fff;">
+                                        {{ $page }}
+                                    </span>
+                                @else
+                                    <a href="{{ $url }}" class="btn btn-sm btn-light rounded-pill px-3">
+                                        {{ $page }}
+                                    </a>
+                                @endif
+                            @endforeach
+
+                            @if($posts->hasMorePages())
+                                <a href="{{ $posts->nextPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            @else
+                                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                                     <i class="bi bi-chevron-right"></i>
+                                </span>
+                            @endif
                         </div>
                     @endif
 
                 </div>
 
-                {{-- Sidebar --}}
+
                 <div class="col-lg-4">
 
-                    {{-- Search Widget --}}
                     <div class="sidebar-widget">
                         <h5><i class="bi bi-search"></i> Search</h5>
                         <form action="{{ route('posts.search') }}" method="GET">
@@ -135,7 +163,6 @@
                         </form>
                     </div>
 
-                    {{-- Categories Widget --}}
                     <div class="sidebar-widget">
                         <h5><i class="bi bi-folder"></i> Categories</h5>
                         <ul class="list-unstyled mb-0">
@@ -154,7 +181,7 @@
                         </ul>
                     </div>
 
-                    {{-- Tags Widget --}}
+
                     <div class="sidebar-widget">
                         <h5><i class="bi bi-tags"></i> Tags</h5>
                         <div>
@@ -165,7 +192,9 @@
                                     #{{ $tag->name }}
                                 </a>
                             @endforeach
+
                         </div>
+
                     </div>
 
                 </div>

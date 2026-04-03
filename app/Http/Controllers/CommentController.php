@@ -49,8 +49,6 @@ class CommentController extends Controller
     public function destroy(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
-
-        // Only comment owner or admin can delete
         if (auth()->user()->id !== $comment->user_id && !auth()->user()->isAdmin()) {
             abort(403);
         }

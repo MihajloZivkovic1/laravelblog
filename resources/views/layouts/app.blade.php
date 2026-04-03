@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Laravel Blog')</title>
+    <title>@yield('title', 'World Blog')</title>
 
     {{-- Bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,10 +15,10 @@
 
     <style>
         :root {
-            --primary: #1a1a2e;
-            --accent: #e94560;
-            --light-bg: #f8f9fa;
-            --text: #333;
+            --primary: #2e1065;
+            --accent: #f97316;
+            --light-bg: #fdf8f6;
+            --text: #3b2f2f;
         }
 
         body {
@@ -120,10 +120,6 @@
             border: none;
         }
 
-        .btn-accent:hover {
-            background: #c73652;
-            color: #fff;
-        }
     </style>
 
     @stack('styles')
@@ -133,7 +129,7 @@
 {{-- Navbar --}}
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">Laravel<span>Blog</span></a>
+        <a class="navbar-brand" href="{{ route('home') }}">World<span>Blog</span></a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -223,7 +219,7 @@
 {{-- Footer --}}
 <footer>
     <div class="container text-center">
-        <p class="mb-0">&copy; {{ date('Y') }} <a href="{{ route('home') }}">LaravelBlog</a>. All rights reserved.</p>
+        <p class="mb-0">&copy; {{ date('Y') }} <a href="{{ route('home') }}">WorldBlog</a>. All rights reserved.</p>
     </div>
 </footer>
 

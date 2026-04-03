@@ -75,10 +75,39 @@
         </div>
     </div>
 
-    {{-- Pagination --}}
     @if($posts->hasPages())
-        <div class="d-flex justify-content-center mt-4">
-            {{ $posts->links() }}
+        <div class="d-flex justify-content-center align-items-center gap-1 mt-4">
+            @if($posts->onFirstPage())
+                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                <i class="bi bi-chevron-left"></i>
+            </span>
+            @else
+                <a href="{{ $posts->previousPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            @endif
+
+            @foreach($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                @if($page == $posts->currentPage())
+                    <span class="btn btn-sm rounded-pill px-3" style="background: var(--accent); color: black;">
+                    {{ $page }}
+                    </span>
+                @else
+                    <a href="{{ $url }}" class="btn btn-sm btn-light rounded-pill px-3">
+                        {{ $page }}
+                    </a>
+                @endif
+            @endforeach
+
+            @if($posts->hasMorePages())
+                <a href="{{ $posts->nextPageUrl() }}" class="btn btn-sm btn-light rounded-pill px-3">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            @else
+                <span class="btn btn-sm btn-light rounded-pill px-3 disabled text-muted">
+                <i class="bi bi-chevron-right"></i>
+            </span>
+            @endif
         </div>
     @endif
 

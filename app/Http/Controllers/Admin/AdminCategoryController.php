@@ -56,7 +56,6 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.category.index')->with('success', 'Category updated!');
     }
 
-
     public function destroy(Request $request ,$id){
         $category = Category::findOrFail($id);
         $category->delete();

@@ -178,7 +178,6 @@
     <script>
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        // ── Submit Comment via AJAX ──
         document.getElementById('commentForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -197,21 +196,20 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-                        // Remove "no comments" message if present
+
                         document.getElementById('noComments')?.remove();
 
-                        // Prepend new comment to list
                         const html = `
                     <div class="d-flex gap-3 mb-4 comment-item" id="comment-${data.comment.id}">
                         <div class="flex-shrink-0">
                             <div style="width:40px;height:40px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;">
-                                ${data.comment.user.charAt(0).toUpperCase()}
+                                ${data.comment.user.name.charAt(0).toUpperCase()}
                             </div>
                         </div>
                         <div class="flex-grow-1">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <strong>${data.comment.user}</strong>
+                                    <strong>${data.comment.user.name}</strong>
                                     <small class="text-muted ms-2">${data.comment.created_at}</small>
                                 </div>
                                 <button class="btn btn-sm btn-outline-danger rounded-pill delete-comment" data-id="${data.comment.id}">
@@ -228,7 +226,6 @@
                 });
         });
 
-        // ── Delete Comment via AJAX ──
         document.getElementById('commentsList').addEventListener('click', function(e) {
             const btn = e.target.closest('.delete-comment');
             if (!btn) return;

@@ -252,7 +252,7 @@
 {{-- Sidebar --}}
 <aside class="sidebar">
     <div class="sidebar-brand">
-        <h4>Laravel<span>Blog</span></h4>
+        <h4>World<span>Blog</span></h4>
         <small>Admin Panel</small>
     </div>
 

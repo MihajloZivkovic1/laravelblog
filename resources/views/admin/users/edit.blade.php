@@ -16,7 +16,6 @@
             <div class="card">
                 <div class="card-body p-4">
 
-                    {{-- User Info --}}
                     <div class="d-flex align-items-center gap-3 mb-4 pb-4 border-bottom">
                         <div style="width:52px;height:52px;background:#6366f1;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.2rem;">
                             {{ strtoupper(substr($user->name, 0, 1)) }}
@@ -56,7 +55,6 @@
             </div>
         </div>
 
-        {{-- User Stats --}}
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">User Stats</div>

@@ -23,6 +23,8 @@ Route::get('/search', [PostController::class, 'search'])->name('posts.search');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+
+//zasticene rute
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -32,8 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
-
-// ─── Admin Routes ──────────────────────────────────────────
+//zasticene rute
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminPostController::class, 'index'])->name('dashboard');
     Route::resource('posts', AdminPostController::class);

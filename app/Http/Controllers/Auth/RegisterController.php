@@ -33,6 +33,6 @@ class RegisterController extends Controller
 
         ActivityLog::storeLog('user.register',auth()->user()->name . ' registered user');
 
-        return redirect('/home');
+        return redirect('/');
     }
 }

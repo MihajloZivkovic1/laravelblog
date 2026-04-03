@@ -70,7 +70,7 @@
         </div>
     @endif
 
-    {{-- Message Modal --}}
+
     <div class="modal fade" id="messageModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content rounded-4 border-0">
@@ -117,7 +117,6 @@
     <script>
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        // ── View Message Modal ──
         document.querySelectorAll('.view-message').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.getElementById('modal-name').textContent    = this.dataset.name;
@@ -130,7 +129,6 @@
             });
         });
 
-        // ── Delete Message ──
         document.querySelectorAll('.delete-message').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (!confirm('Delete this message?')) return;
