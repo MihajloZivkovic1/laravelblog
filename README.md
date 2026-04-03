@@ -9,7 +9,7 @@ Blog platforma napravljena u Laravelu. Podržava objave, kategorije, tagove, kom
 ### Instalacija
 
 ```bash
-git clone https://github.com/yourusername/laravelblog.git
+git clone https://github.com/MihajloZivkovic1/laravelblog.git
 cd worldblog
 
 composer install
